@@ -1,0 +1,35 @@
+doctype strict
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title Prism: The stone social network
+    link(rel="stylesheet" href="style/main.css")
+    link(rel="icon" href="favicon.svg")
+  body
+    if name
+      nav
+      //
+        a.options(href="/chal") This Week's Challenge
+        a.otions(href="/leader") Leaderboard
+      h1.title Create your personal #[span.highl prism] here.
+      div
+        svg(height="256" width="256" viewbox="0 0 512 512")
+          ellipse(cx="256" cy="256" rx="256" fill="#f15603" id="outer-c")
+          ellipse(cx="256" cy="256" rx="100" fill="#a4db0b" id="inner-c")
+        br
+        br
+        div
+          label(for="outer") Outer Colour: 
+          input(type="color" id="outer" value="#f15603")
+          br
+          label(for="inner") Inner Colour: 
+          input(type="color" id="inner" value="#a4db0b")
+        script(src="./acc.js")
+    else   
+      h1.title Sign up here.
+      div
+        | Authenticate with repl.it to continue.
+        br
+        br
+        br
+        script(authed="location.reload()" src="./auth.js")
