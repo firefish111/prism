@@ -47,27 +47,27 @@
     background: #605f57 !important;
   } &:active {
     background: var(--yes);
+  } &.help {
+    cursor: help;
   }
 } ul > li {
   text-align: left;
-} form {
-  margin-bottom: 30px;
-  & > * {
-    font-weight: 700;
-    margin-right: 10px;
-  } & > label {
-    color: var(--no);
-  } & > input[type=text] {
-    width: 50%;
-    @at-root pre, &:focus {
-      padding: 10px;
-      border-radius: 5px;
-      background: #ccc;
-      color: black;
-    }
-  }
 } div {
-  &.error > & {
+  @at-root form > &.sect {
+    & > * {
+      font-weight: 700;
+      margin-right: 10px;
+    } & > input {
+      border: 1px solid #605f57;
+      padding: 1px 2px;
+      width: 50px;
+      @at-root label, & {
+        height: 25px;
+      } @at-root pre, &:focus {
+        border-radius: 5px;
+      }
+    }
+  } &.error > & {
     font-weight: 700;
     &#success {
       color: var(--yes); 

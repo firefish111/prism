@@ -47,24 +47,24 @@ button {
     background: #605f57 !important; }
   button:active {
     background: var(--yes); }
+  button.help {
+    cursor: help; }
 
 ul > li {
   text-align: left; }
 
-form {
-  margin-bottom: 30px; }
-  form > * {
-    font-weight: 700;
-    margin-right: 10px; }
-  form > label {
-    color: var(--no); }
-  form > input[type=text] {
-    width: 50%; }
-    pre, form > input[type=text]:focus {
-      padding: 10px;
-      border-radius: 5px;
-      background: #ccc;
-      color: black; }
+form > div.sect > * {
+  font-weight: 700;
+  margin-right: 10px; }
+
+form > div.sect > input {
+  border: 1px solid #605f57;
+  padding: 1px 2px;
+  width: 50px; }
+  label, form > div.sect > input {
+    height: 25px; }
+  pre, form > div.sect > input:focus {
+    border-radius: 5px; }
 
 div.error > div {
   font-weight: 700; }

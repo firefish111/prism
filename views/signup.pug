@@ -5,26 +5,50 @@ html(lang="en")
     title Prism: The stone social network
     link(rel="stylesheet" href="style/main.css")
     link(rel="icon" href="favicon.svg")
+    script(src="/socket.io/socket.io.js")
   body
     if name
       nav
-      //
-        a.options(href="/chal") This Week's Challenge
-        a.otions(href="/leader") Leaderboard
+        //
+          a.options(href="/chal") This Week's Challenge
+          a.otions(href="/leader") Leaderboard
+        button.help
       h1.title Create your personal #[span.highl prism] here.
       div
         svg(height="256" width="256" viewbox="0 0 512 512")
-          ellipse(cx="256" cy="256" rx="256" fill="#f15603" id="outer-c")
-          ellipse(cx="256" cy="256" rx="100" fill="#a4db0b" id="inner-c")
+          ellipse(cx="256" cy="256" rx="256" fill=`#${colq[0]}` id="outer-c")
+          ellipse(cx="256" cy="256" rx="100" fill=`#${colq[1]}` id="inner-c")
         br
         br
-        div
-          label(for="outer") Outer Colour: 
-          input(type="color" id="outer" value="#f15603")
-          br
-          label(for="inner") Inner Colour: 
-          input(type="color" id="inner" value="#a4db0b")
-        script(src="./acc.js")
+        form
+          div.sect.outer
+            label(for="outer") Outer Colour:
+            input(type="color" id="outer" value=`#${colq[0]}`)
+          div.sect.inner
+            label(for="inner") Inner Colour:
+            input(type="color" id="inner" value=`#${colq[1]}`)
+          div.sect.radius
+            label(for="radius") Inner Radius:
+            input(type="number" id="radius" value="100" max="100" min="40" step="4")
+          div.sect.go
+            button#go Create account
+      script(src="./acc.js")
+      script.
+        const sock = io();
+        document.querySelector("button#go").addEventListener("click", e => {
+          sock.emit(
+            "acc-new",
+            "#{name}",
+            (`6f${
+              document.querySelector("input#outer").value.slice(1)
+            }0${
+              ((parseInt(document
+                .querySelector("input#radius").value) / 4) - 10)
+                .toString(16)
+            }${
+              document.querySelector("input#inner").value.slice(1)
+            }`).toUpperCase());
+        });
     else   
       h1.title Sign up here.
       div
