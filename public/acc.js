@@ -11,6 +11,5 @@ document
   .addEventListener("change", e => {
     document
       .querySelector("ellipse#inner-c")
-      .setAttribute("rx", 
-        Math.floor(((((Math.round(Number(e.target.value) / 4) * 4) / 101) % 1) * 101).toString()));
+      .setAttribute("rx", e.target.value);
   }, false);

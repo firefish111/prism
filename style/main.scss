@@ -19,6 +19,9 @@
     &.curr {
       color: var(--yes);
       font-weight: 700;
+    } &.wip {
+      color: var(--no);
+      text-shadow: 0px 0px 6px var(--no);
     }
   }
 } nav {

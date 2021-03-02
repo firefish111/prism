@@ -36,18 +36,20 @@ html(lang="en")
       script.
         const sock = io();
         document.querySelector("button#go").addEventListener("click", e => {
-          sock.emit(
-            "acc-new",
-            "#{name}",
-            (`6f${
-              document.querySelector("input#outer").value.slice(1)
-            }0${
-              ((parseInt(document
-                .querySelector("input#radius").value) / 4) - 10)
-                .toString(16)
-            }${
-              document.querySelector("input#inner").value.slice(1)
-            }`).toUpperCase());
+          let rad = ((Number(document
+                .querySelector("input#radius")
+                .value) / 4)
+                - 10);
+          if (0 < rad && rad <= 15 && rad == Math.floor(rad)) {
+            sock.emit(
+              "acc-new",
+              "#{name}",
+              (`6f${
+                document.querySelector("input#outer").value.slice(1)
+              }0${rad.toString(16)}${
+                document.querySelector("input#inner").value.slice(1)
+              }`).toUpperCase());
+          }
         });
     else   
       h1.title Sign up here.
