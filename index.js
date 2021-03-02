@@ -20,7 +20,7 @@ app.use(expr.static(`${__dirname}/public`));
 
 app.get("/signup", (req, res) => {
   let usr = req.get('X-Replit-User-Name');
-  if (Object.keys(read()).includes(usr)) {
+  if (!Object.keys(read()).includes(usr)) {
     res.render("signup.pug", {
       name: usr ? usr : false,
       colq: [rhex(), rhex()]
