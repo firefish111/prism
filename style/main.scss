@@ -12,7 +12,7 @@
   --misc: #e9c810;
 } a {
   display: inline-block;
-  &.options {
+  @at-root nav > &.options {
     text-decoration: none;
     font-size: 20px;
     margin-right: 36px;
@@ -22,11 +22,11 @@
     } &.wip {
       color: var(--no);
       text-shadow: 0px 0px 6px var(--no);
+      cursor: not-allowed;
     }
   }
 } nav {
   text-align: right;
-  color: #000;
 } h1 {
   &.title {
     font-size: 50px;
@@ -53,8 +53,6 @@
   } &.help {
     cursor: help;
   }
-} ul > li {
-  text-align: left;
 } div {
   @at-root form > &.sect {
     & > * {
@@ -78,6 +76,28 @@
       color: var(--no);
     } &#info {
       color: var(--misc);
+    }
+  } &.post {
+    margin: auto;
+    width: 60%;
+    border: 3px solid white;
+    padding: 10px;
+    & > [class] {
+      text-align: left;
+    } & > div.author {
+      padding-left: 50px;
+      color: var(--yes) 
+    } & > div.title {
+      font-size: 25px;
+      text-align: center !important;
+    } & > div.content {
+      margin-top: 10px;
+      color: #aaa;
+      text-shadow: 0px 0px 2px #aaa;
+      /* overflow magic */
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 }

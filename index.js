@@ -12,7 +12,7 @@ app.use(sass({
 }));
 
 let rhex  = () => Math.random().toString(16).slice(2, 8),
-    read  = () => JSON.parse(f.readFileSync("./data/data.json")),
+    read  = () => require("./data/data"),
     write = dat => f.writeFileSync("./data/data.json", JSON.stringify(dat));
 
 app.set("view engine", "pug");
