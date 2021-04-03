@@ -10,13 +10,13 @@ html(lang="en")
     nav
       a.options.curr Home
       a.options.wip Post
-      a.options.wip My Profile
-    h1.title 
-      span.highl Home
+      a.options(href="/account") My Profile
+    h1.title: span.highl Home
     div
-      //- e
       each val in posts
         div.post
-          div.author= val.author
+          div.con
+            div.author= val.author
+            div.timestamp= new Date(val.time).toLocaleString()
           div.title= val.title
           div.content= val.content

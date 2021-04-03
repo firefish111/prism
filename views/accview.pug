@@ -1,0 +1,22 @@
+doctype strict
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title Prism: The stone social network
+    link(rel="stylesheet" href="style/main.css")
+    link(rel="icon" href="favicon.svg")
+    script(src="/socket.io/socket.io.js")
+  body
+    nav
+      a.options(href="/home") Home
+      a.options.wip Post
+      a.options.curr My Profile
+    h1.title: span.highl Manage your account
+    div
+      div.picture
+      script(type="module").
+        import { getSVG } from "./decode.js";
+        document.querySelector("div > div.picture").innerHTML =
+          getSVG("#{code}") 
+    div
+      div Name: #{name}

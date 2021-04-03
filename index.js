@@ -28,6 +28,17 @@ app.get("/signup", (req, res) => {
   } else res.redirect("/home")
 });
 
+app.get("/account", (req, res) => {
+  let usr = req.get('X-Replit-User-Name'),
+      dat = read("data");
+  if (Object.keys(dat).includes(usr)) {
+    res.render("accview.pug", {
+      name: usr ? usr : false,
+      code: dat[usr].prismic
+    });
+  } else res.status(403).render("404.pug", { err: 403 });
+});
+
 app.get("/home", (req, res) => {
   let usr = req.get("X-Replit-User-Name");
   if (usr) {
