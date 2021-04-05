@@ -6,17 +6,26 @@ html(lang="en")
     link(rel="stylesheet" href="style/main.css")
     link(rel="icon" href="favicon.svg")
     script(src="/socket.io/socket.io.js")
+    script.
+      const sock = io();
+      let bio = () => {
+        sock.emit("bio", "#{name}", document.querySelector("textarea.bio").value);
+        location.reload();
+      }
   body
     nav
       a.options(href="/home") Home
       a.options.wip Post
       a.options.curr My Profile
     h1.title: span.highl Manage your account
-    div
+    div.account
       div.picture
+      div.name #{name}
+      textarea(placeholder="Add your bio here...", maxlength="140").bio= bio
       script(type="module").
         import { getSVG } from "./decode.js";
-        document.querySelector("div > div.picture").innerHTML =
-          getSVG("#{code}") 
-    div
-      div Name: #{name}
+        sock.emit("getUsr", "#{name}", prism => {
+          document.querySelector("div > div.picture").innerHTML =
+            getSVG(prism);
+        });
+    button(onclick="bio()") Submit

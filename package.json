@@ -1,8 +1,15 @@
 {
   "name": "prism",
   "version": "1.0.0",
-  "description": "",
+  "description": "this is a social network with stones as you are god at backend you have been invited",
   "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-sass-middleware": "^0.11.0",
+    "pug": "^3.0.2",
+    "socket.io": "^4.0.1"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,11 +23,5 @@
   "bugs": {
     "url": "https://github.com/firefish111/prism/issues"
   },
-  "homepage": "https://github.com/firefish111/prism#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "node-sass-middleware": "^0.11.0",
-    "pug": "^3.0.0",
-    "socket.io": "^3.1.1"
-  }
+  "homepage": "https://github.com/firefish111/prism#readme"
 }

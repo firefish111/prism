@@ -7,6 +7,12 @@ let getSVG = code => {
   let c2 = code.slice(10);
   r *= 4; r += 40;
   return `<svg height="256" width="256" viewbox="0 0 512 512"><ellipse cx="256" cy="256" rx="256" fill="#${c1}"/><ellipse cx="256" cy="256" rx="${r}" fill="#${c2}"/></svg>`;
+};
+
+const sock = io();
+
+let uQry = usr => {
+  sock.emit("getUsr", usr);
 }
 
-export { getSVG };
+export { getSVG, uQry };

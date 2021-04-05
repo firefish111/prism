@@ -16,7 +16,19 @@ html(lang="en")
       each val in posts
         div.post
           div.con
+            div(publisher=`${val.author}`).avatar
             div.author= val.author
             div.timestamp= new Date(val.time).toLocaleString()
           div.title= val.title
           div.content= val.content
+    script(type="module").
+      import { getSVG } from "./decode.js";
+      const sock = io();
+      document.querySelectorAll("div.avatar[publisher]").forEach(async usr => {
+        console.log(usr);
+        let pub = usr.getAttribute("publisher");
+        console.log(pub);
+        sock.emit("getUsr", pub, prismic => {
+          usr.innerHTML = getSVG(prismic);
+        });
+      });

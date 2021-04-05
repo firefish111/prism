@@ -88,8 +88,13 @@
     padding: 10px;
     & > [class], & > div.con > [class] {
       text-align: left;
+    } & > div.con > div.avatar {
+      &, & > svg {
+        width: 20px;
+        height: 20px;
+      }
     } & > div.con > div.author {
-      padding-left: 50px;
+      padding-left: 7px;
       color: var(--yes);
     } & > div.con > div.timestamp {
       margin-left: auto;
@@ -111,7 +116,30 @@
       display: flex;
       flex-flow: row wrap;
     }
-  } & > &.picture {
-    padding-bottom: 18px;
+  } &.account {
+    display: flex;
+    flex-flow: column wrap;
+    height: 256px;
+    margin-bottom: 12px;
+    & > div.picture {
+      order: -1;
+      width: 256px;
+      height: 256px;
+      margin-left: auto;
+      padding-right: 12px;
+    } & > div.name {
+      order: 0;
+      height: 75px;
+      font-size: 70px;
+      text-align: left;
+      width: auto;
+    } & > textarea.bio {
+      order: 1;
+      text-align: left;
+      height: 170px; 
+      resize: none;
+      width: 30%;
+      flex-basis: auto;
+    }
   }
 }
