@@ -1,0 +1,28 @@
+doctype strict
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title Prism: The stone social network
+    link(rel="stylesheet" href="style/main.css")
+    link(rel="icon" href="favicon.svg")
+    script(src="/socket.io/socket.io.js")
+    //- markdown go brr
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/monokai.min.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/markdown/markdown.min.js")
+  body
+    nav
+      a.options(href="/") Home
+      a.options.curr Post
+      a.options(href="/account") My Profile
+    h1.title: span.highl Post to Prism
+    div.CodeMirror
+      textarea.CodeMirror
+    script.
+      CodeMirror.fromTextArea(document.querySelector("textarea.CodeMirror"), {
+        lineNumbers: true,
+        tabSize: 2,
+        mode: "markdown",
+        theme: "monokai"
+      });

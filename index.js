@@ -45,6 +45,12 @@ app.get("/home", (req, res) => {
   else res.status(403).render("404.pug", { err: 403 });
 });
 
+app.get("/post", (req, res) => {
+  let usr = req.get("X-Replit-User-Name").toLowerCase();
+  if (usr) res.render("post.pug", { name: usr });
+  else res.status(403).render("404.pug", { err: 403 });
+});
+
 app.get("/", (req, res) => {
   let usr = req.get("X-Replit-User-Name").toLowerCase();
   if (usr) res.redirect("/home");

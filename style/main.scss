@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css');
 
-:not(pre) {
-  font-family: "Fira Code VF", "IBM Plex Mono";
+body {
+  --fonts: "Fira Code VF", "IBM Plex Mono";
+  font-family: var(--fonts);
   color: white;
   background: #1F232B;
   text-align: center;
@@ -18,6 +19,7 @@
     margin-right: 36px;
     margin-top: 7px;
     text-shadow: 0px 0px 6px white;
+    color: white;
     &.curr {
       color: var(--yes) !important;
       text-shadow: 0px 0px 6px var(--yes) !important;
@@ -29,14 +31,14 @@
     }
   }
 } nav {
-  text-align: right;
+  text-align: right !important;
 } h1 {
   &.title {
     font-size: 50px;
-    margin-top: 34px;
+    margin: 34px 0px;
     padding-top: 6px;
   } & > span.highl {
-    color: var(--prismic);
+    color: var(--prismic) !important;
     text-shadow: 0px 0px 6px var(--prismic);
   }
 } button {
@@ -57,7 +59,12 @@
     cursor: help;
   }
 } div {
-  @at-root form > &.sect {
+  &.CodeMirror {
+    width: 60vw;
+    margin: auto;
+    background: #272822 !important; 
+    padding: 5px;
+  } @at-root form > &.sect {
     & > * {
       font-weight: 700;
       margin-right: 10px;
@@ -74,11 +81,11 @@
   } &.error > & {
     font-weight: 700;
     &#success {
-      color: var(--yes); 
+      color: var(--yes) !important; 
     } &#failure {
-      color: var(--no);
+      color: var(--no) !important;
     } &#info {
-      color: var(--misc);
+      color: var(--misc) !important;
     }
   } &.post {
     margin: auto;
@@ -95,7 +102,7 @@
       }
     } & > div.con > div.author {
       padding-left: 7px;
-      color: var(--yes);
+      color: var(--yes) !important;
     } & > div.con > div.timestamp {
       margin-left: auto;
       color: #aaa;
@@ -106,7 +113,7 @@
       text-align: center !important;
     } & > div.content {
       margin-top: 10px;
-      color: #aaa;
+      color: #aaa !important;
       text-shadow: 0px 0px 2px #aaa;
       /* overflow magic */
       text-overflow: ellipsis;
@@ -142,4 +149,8 @@
       flex-basis: auto;
     }
   }
+} [class*="CodeMirror"] {
+  text-align: left !important;
+  font-family: var(--fonts) !important;
+  font-size: 15px;
 }
