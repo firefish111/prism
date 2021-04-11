@@ -13,7 +13,7 @@ body {
   --misc: #e9c810;
 } a {
   display: inline-block;
-  @at-root nav > &.options {
+  nav > &.options {
     text-decoration: none;
     font-size: 20px;
     margin-right: 36px;
@@ -64,17 +64,22 @@ body {
     margin: auto;
     background: #272822 !important; 
     padding: 5px;
-  } @at-root form > &.sect {
+  } form > &.sect {
     & > * {
       font-weight: 700;
       margin-right: 10px;
+      font-family: var(--fonts);
     } & > input {
       border: 1px solid #605f57;
       padding: 1px 2px;
-      width: 50px;
-      @at-root label, & {
+      color: white;
+      
+      background: #272822;
+      &:not([type="text"]) {
+        width: 50px;
+      } label, & {
         height: 25px;
-      } @at-root pre, &:focus {
+      } pre, &:focus {
         border-radius: 5px;
       }
     }

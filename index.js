@@ -12,8 +12,8 @@ app.use(sass({
 }));
 
 const rhex  = () => Math.random().toString(16).slice(2, 8),
-    read  = loc => JSON.parse(f.readFileSync(`./data/${loc}.json`)),
-    write = (dat, loc) => f.writeFileSync(`./data/${loc}.json`, JSON.stringify(dat));
+      read  = loc => JSON.parse(f.readFileSync(`./data/${loc}.json`)),
+      write = (dat, loc) => f.writeFileSync(`./data/${loc}.json`, JSON.stringify(dat));
 
 app.set("view engine", "pug");
 app.use(expr.static(`${__dirname}/public`));
@@ -41,7 +41,7 @@ app.get("/account", (req, res) => {
 
 app.get("/home", (req, res) => {
   let usr = req.get("X-Replit-User-Name").toLowerCase();
-  if (usr) res.render("home.pug", { name: usr, posts: read("posts") });
+  if (usr) res.render("home.pug", { name: usr, posts: read("posts").slice(-5).reverse() });
   else res.status(403).render("404.pug", { err: 403 });
 });
 
@@ -83,6 +83,17 @@ io.on("connection", sock => {
     let dt = read("data")[usr.toLowerCase()];
     console.log(dt, typeof dt);
     fe(read("data")[usr.toLowerCase()].prismic);
+  });
+
+  sock.on("post", (title, content, author) => {
+    let posts = read("posts");
+    posts.push({
+      author,
+      title,
+      content,
+      time: Date.now()
+    });
+    write(posts, "posts");
   });
 });
 

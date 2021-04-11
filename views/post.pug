@@ -17,12 +17,37 @@ html(lang="en")
       a.options.curr Post
       a.options(href="/account") My Profile
     h1.title: span.highl Post to Prism
-    div.CodeMirror
-      textarea.CodeMirror
+    div Supports Markdown!
+    form
+      div.sect
+        input#title(type="text" placeholder="Title...")
+      div.CodeMirror.sect
+        textarea.CodeMirror
+      div.sect.go
+        button#post Post
     script.
-      CodeMirror.fromTextArea(document.querySelector("textarea.CodeMirror"), {
+      const sock = io();
+      let md = CodeMirror.fromTextArea(document.querySelector("textarea.CodeMirror"), {
         lineNumbers: true,
         tabSize: 2,
         mode: "markdown",
-        theme: "monokai"
+        theme: "monokai",
+        extraKeys: {
+          Tab: cm => {
+            /* courtesy of
+
+            https://github.com/codemirror/CodeMirror/issues/988#issuecomment-14921785 */
+            if (cm.somethingSelected()) {
+              cm.indentSelection("add");
+            } else {
+              cm.replaceSelection(
+                cm.getOption("indentWithTabs") ? "\t" :
+                Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input");
+            }
+          }
+        },
+        value: "Type some Markdown here!"
       });
+      document.querySelector("button#post").onclick = () => {
+        sock.emit("post", document.querySelector("input#title").value, md.getValue(), "#{name}");
+      };
