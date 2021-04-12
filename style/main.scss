@@ -13,13 +13,16 @@ body {
   --misc: #e9c810;
 } a {
   display: inline-block;
-  nav > &.options {
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
+  div.content > a {
+    color: var(--prismic) !important;
+    text-decoration: underline;
+  } nav > &.options {
     font-size: 20px;
     margin-right: 36px;
     margin-top: 7px;
     text-shadow: 0px 0px 6px white;
-    color: white;
     &.curr {
       color: var(--yes) !important;
       text-shadow: 0px 0px 6px var(--yes) !important;
@@ -50,6 +53,7 @@ body {
   border-radius: 50px;
   transition: background 215ms !important;
   margin-bottom: 15px;
+  font-family: var(--fonts) !important;
   &, & > a {
     text-decoration: none;
     background: #605f57 !important;
@@ -81,7 +85,10 @@ body {
         height: 25px;
       } pre, &:focus {
         border-radius: 5px;
-      }
+      } 
+    } &#top {
+      margin: 15px auto;
+      width: 60vw;
     }
   } &.error > & {
     font-weight: 700;
@@ -98,21 +105,8 @@ body {
     border: 3px solid white;
     // border-bottom: 0px !important;
     padding: 10px;
-    & > [class], & > div.con > [class] {
+    & > [class], div.con > [class] {
       text-align: left;
-    } & > div.con > div.avatar {
-      &, & > svg {
-        width: 20px;
-        height: 20px;
-      }
-    } & > div.con > div.author {
-      padding-left: 7px;
-      color: var(--yes) !important;
-    } & > div.con > div.timestamp {
-      margin-left: auto;
-      color: #aaa;
-      text-shadow: 0px 0px 2px #aaa;
-      font-size: 12px;
     } & > div.title {
       font-size: 25px;
       text-align: center !important;
@@ -124,9 +118,25 @@ body {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-    } & > div.con {
-      display: flex;
-      flex-flow: row wrap;
+    } @at-root div#head, & {
+      & > div.con {
+        display: flex;
+        flex-flow: row wrap;
+        & > div.avatar {
+          &, & > svg {
+            width: 20px;
+            height: 20px;
+          }
+        } & > div.author {
+          padding-left: 7px;
+          color: var(--yes) !important;
+        } & > div.timestamp {
+          margin-left: auto;
+          color: #aaa;
+          text-shadow: 0px 0px 2px #aaa;
+          font-size: 12px;
+        }
+      }
     }
   } &.account {
     display: flex;
@@ -158,4 +168,7 @@ body {
   text-align: left !important;
   font-family: var(--fonts) !important;
   font-size: 15px;
+} pre, code {
+  color: var(--no);
+  background: #272822;
 }

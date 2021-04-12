@@ -3,7 +3,8 @@ const expr = require("express"),
       serv = require("http").createServer(app),
       io   = require("socket.io")(serv),
       f    = require("fs"),
-      sass = require("node-sass-middleware");
+      sass = require("node-sass-middleware"),
+      md   = require("markdown-it")();
 
 app.use(sass({
   src: __dirname,
@@ -13,7 +14,11 @@ app.use(sass({
 
 const rhex  = () => Math.random().toString(16).slice(2, 8),
       read  = loc => JSON.parse(f.readFileSync(`./data/${loc}.json`)),
-      write = (dat, loc) => f.writeFileSync(`./data/${loc}.json`, JSON.stringify(dat));
+      write = (dat, loc) => f.writeFileSync(`./data/${loc}.json`, JSON.stringify(dat)),
+      mdify = obj => {
+        obj.content = md.render(obj.content);
+        return obj;
+      };
 
 app.set("view engine", "pug");
 app.use(expr.static(`${__dirname}/public`));
@@ -48,6 +53,17 @@ app.get("/home", (req, res) => {
 app.get("/post", (req, res) => {
   let usr = req.get("X-Replit-User-Name").toLowerCase();
   if (usr) res.render("post.pug", { name: usr });
+  else res.status(403).render("404.pug", { err: 403 });
+});
+
+app.get("/post/:num", (req, res) => {
+  let usr = req.get("X-Replit-User-Name").toLowerCase();
+  console.log(req.params.num, mdify(read("posts")[Number(req.params.num)]));
+  if (usr) res.render("postview.pug", {
+    name: usr,
+    post: mdify(
+      read("posts")[Number(req.params.num)]
+    )});
   else res.status(403).render("404.pug", { err: 403 });
 });
 
@@ -91,7 +107,8 @@ io.on("connection", sock => {
       author,
       title,
       content,
-      time: Date.now()
+      time: Date.now(),
+      id: posts.length
     });
     write(posts, "posts");
   });

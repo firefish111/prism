@@ -3,7 +3,7 @@ html(lang="en")
   head
     meta(charset="utf-8")
     title Prism: The stone social network
-    link(rel="stylesheet" href="style/main.css")
+    link(rel="stylesheet" href="/style/main.css")
     link(rel="icon" href="favicon.svg")
     script(src="/socket.io/socket.io.js")
     //- markdown go brr
@@ -19,7 +19,7 @@ html(lang="en")
     h1.title: span.highl Post to Prism
     div Supports Markdown!
     form
-      div.sect
+      div.sect#top
         input#title(type="text" placeholder="Title...")
       div.CodeMirror.sect
         textarea.CodeMirror

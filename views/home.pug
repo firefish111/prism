@@ -3,7 +3,7 @@ html(lang="en")
   head
     meta(charset="utf-8")
     title Prism: The stone social network
-    link(rel="stylesheet" href="style/main.css")
+    link(rel="stylesheet" href="/style/main.css")
     link(rel="icon" href="favicon.svg")
     script(src="/socket.io/socket.io.js")
   body
@@ -19,7 +19,8 @@ html(lang="en")
             div(publisher=`${val.author}`).avatar
             div.author= val.author
             div.timestamp= new Date(val.time).toLocaleString()
-          div.title= val.title
+          div.title
+            a(href=`/post/${val.id}`)= val.title
           div.content= val.content
     script(type="module").
       import { getSVG } from "./decode.js";

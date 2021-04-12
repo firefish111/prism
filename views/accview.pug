@@ -3,7 +3,7 @@ html(lang="en")
   head
     meta(charset="utf-8")
     title Prism: The stone social network
-    link(rel="stylesheet" href="style/main.css")
+    link(rel="stylesheet" href="/style/main.css")
     link(rel="icon" href="favicon.svg")
     script(src="/socket.io/socket.io.js")
     script.
@@ -28,4 +28,4 @@ html(lang="en")
           document.querySelector("div > div.picture").innerHTML =
             getSVG(prism);
         });
-    button(onclick="bio()") Submit
+    button(onclick="bio()") Update
