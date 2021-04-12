@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
+    "markdown-it": "^12.0.4",
     "node-sass-middleware": "^0.11.0",
     "pug": "^3.0.2",
     "socket.io": "^4.0.1"

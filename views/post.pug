@@ -1,0 +1,53 @@
+doctype strict
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title Prism: The stone social network
+    link(rel="stylesheet" href="/style/main.css")
+    link(rel="icon" href="favicon.svg")
+    script(src="/socket.io/socket.io.js")
+    //- markdown go brr
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/monokai.min.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/markdown/markdown.min.js")
+  body
+    nav
+      a.options(href="/") Home
+      a.options.curr Post
+      a.options(href="/account") My Profile
+    h1.title: span.highl Post to Prism
+    div Supports Markdown!
+    form
+      div.sect#top
+        input#title(type="text" placeholder="Title...")
+      div.CodeMirror.sect
+        textarea.CodeMirror
+      div.sect.go
+        button#post Post
+    script.
+      const sock = io();
+      let md = CodeMirror.fromTextArea(document.querySelector("textarea.CodeMirror"), {
+        lineNumbers: true,
+        tabSize: 2,
+        mode: "markdown",
+        theme: "monokai",
+        extraKeys: {
+          Tab: cm => {
+            /* courtesy of
+
+            https://github.com/codemirror/CodeMirror/issues/988#issuecomment-14921785 */
+            if (cm.somethingSelected()) {
+              cm.indentSelection("add");
+            } else {
+              cm.replaceSelection(
+                cm.getOption("indentWithTabs") ? "\t" :
+                Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input");
+            }
+          }
+        },
+        value: "Type some Markdown here!"
+      });
+      document.querySelector("button#post").onclick = () => {
+        sock.emit("post", document.querySelector("input#title").value, md.getValue(), "#{name}");
+      };

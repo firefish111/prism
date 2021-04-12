@@ -1,0 +1,31 @@
+doctype strict
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title Prism: The stone social network
+    link(rel="stylesheet" href="/style/main.css")
+    link(rel="icon" href="/favicon.svg")
+    script(src="/socket.io/socket.io.js")
+    script(src="https://cdn.jsdelivr.net/npm/marked/marked.min.js")
+  body
+    nav
+      a.options(href="/home") Home
+      a.options(href="/post") Post 
+      a.options(href="/account") My Profile
+    div#head
+      div.con
+        div(publisher=`${post.author}`).avatar
+        div.author= post.author
+        div.timestamp= new Date(post.time).toLocaleString()
+    h1.title= post.title
+    div.content(style="text-align: left; padding-left: 4em; padding-right: 4em;") !{post.content}
+    script(type="module").
+      import { getSVG } from "../decode.js";
+      const sock = io();
+      let usr = document.querySelector("div.avatar[publisher]")
+      console.log(usr);
+      let pub = usr.getAttribute("publisher");
+      console.log(pub);
+      sock.emit("getUsr", pub, prismic => {
+        usr.innerHTML = getSVG(prismic);
+      });
